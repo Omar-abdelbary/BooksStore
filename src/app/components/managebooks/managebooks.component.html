@@ -1,0 +1,240 @@
+<section class="manage-books">
+  <div class="container">
+
+
+    <!-- background animation  -->
+    <div class="background">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+
+
+
+
+    <form class="form-about" [formGroup]="bookForm" (ngSubmit)="SubmitBook()">
+
+
+      <!-- heading form  -->
+
+      <div class="col-12">
+        <div class="form-heading">
+          <h4>{{ isEditMode ? 'Edit Book' : 'Add Book' }}</h4>
+
+        </div>
+      </div>
+
+
+      <!-- titel  -->
+      <div class="col-12">
+
+        <div class="form-info">
+          <label for="title">Title:</label>
+          <input formControlName="title" class="form-control" id="title" placeholder="enter title book here" [ngClass]="{
+            'is-valid' : !bookForm.get('title')?.errors && (bookForm.get('title')?.touched ||bookForm.get('title')?.dirty) ,
+            'is-invalid' : bookForm.get('title')?.errors && (bookForm.get('title')?.touched ||bookForm.get('title')?.dirty)
+          }" />
+
+          @if(bookForm.get("title")?.errors && bookForm.get("title")?.touched) {
+
+          <div class="alert alert-danger">
+
+
+            @if (bookForm.get("title")?.getError("required")) {
+            <p>Title is required.</p>
+            }
+
+            @else if (bookForm.get("title")?.getError("minlength")) {
+            <p>Title must be at least 3 characters long.</p>
+            }
+
+            @else if (bookForm.get("title")?.getError("maxlength")) {
+            <p>Title cannot exceed 15 characters.</p>
+            }
+          </div>
+          }
+        </div>
+
+      </div>
+
+
+      <!-- author -->
+      <div class="col-12">
+
+        <div class="form-info">
+          <label for="author">Author:</label>
+          <input formControlName="author" class="form-control" id="author" placeholder="enter author here." [ngClass]="{
+            'is-valid' : !bookForm.get('author')?.errors && (bookForm.get('author')?.touched ||bookForm.get('author')?.dirty) ,
+          'is-invalid' : bookForm.get('author')?.errors && (bookForm.get('author')?.touched ||bookForm.get('author')?.dirty)
+          }" />
+
+
+          @if (bookForm.get("author")?.errors && bookForm.get("author")?.touched) {
+
+          <div class="alert alert-danger">
+
+            @if (bookForm.get("author")?.getError("required")) {
+            <p>Author is required.</p>
+            }
+
+            @else if (bookForm.get("author")?.getError("minlength")) {
+            <p>Author must be at least 3 characters long.</p>
+            }
+
+            @else if (bookForm.get("author")?.getError("maxlength")) {
+            <p>Author cannot exceed 15 characters.</p>
+            }
+          </div>
+          }
+        </div>
+
+      </div>
+
+
+      <!-- category -->
+      <div class="col-12">
+
+        <div class="form-info">
+          <label for="category">Category:</label>
+          <input formControlName="category" class="form-control" id="category" placeholder="enter cateogry here "
+            [ngClass]="{
+            'is-valid' : !bookForm.get('category')?.errors && (bookForm.get('category')?.touched ||bookForm.get('category')?.dirty) ,
+            'is-invalid' : bookForm.get('category')?.errors && (bookForm.get('category')?.touched ||bookForm.get('category')?.dirty)
+          }" />
+
+
+          @if (bookForm.get("category")?.errors && bookForm.get("category")?.touched) {
+
+          <div class="alert alert-danger">
+
+
+            @if (bookForm.get("category")?.getError("required")) {
+            <p>Category is required.</p>
+            }
+
+            @else if (bookForm.get("category")?.getError("minlength")) {
+            <p>Category must be at least 3 characters long.</p>
+            }
+
+            @else if (bookForm.get("category")?.getError("maxlength")) {
+            <p>Category cannot exceed 15 characters.</p>
+            }
+          </div>
+          }
+        </div>
+
+      </div>
+
+
+      <!-- price -->
+      <div class="col-12">
+
+        <div class="form-info">
+          <label for="price">Price:</label>
+          <input formControlName="price" type="number" class="form-control" id="price" placeholder="enter price here.."
+            [ngClass]="{
+            'is-valid' : !bookForm.get('price')?.errors && (bookForm.get('price')?.touched ||bookForm.get('price')?.dirty) ,
+            'is-invalid' : bookForm.get('price')?.errors && (bookForm.get('price')?.touched ||bookForm.get('price')?.dirty)
+          }" />
+
+
+
+          @if (bookForm.get("price")?.errors && bookForm.get("price")?.touched) {
+
+          <div class="alert alert-danger">
+
+            @if (bookForm.get("price")?.getError("required")) {
+            <p>Price is required.</p>
+            }
+
+            @else if (bookForm.get("price")?.getError("pattern")) {
+            <p>Price must be a valid number</p>
+            }
+          </div>
+          }
+        </div>
+
+      </div>
+
+
+      <!-- description -->
+      <div class="col-12">
+
+        <div class="form-info">
+          <label for="description">Description:</label>
+          <input formControlName="description" class="form-control" id="description"
+            placeholder="enter description here ." [ngClass]="{
+            'is-valid' : !bookForm.get('description')?.errors && (bookForm.get('description')?.touched ||bookForm.get('description')?.dirty) ,
+            'is-invalid' : bookForm.get('description')?.errors && (bookForm.get('description')?.touched ||bookForm.get('description')?.dirty)
+          }" />
+
+
+
+          @if (bookForm.get("description")?.errors && bookForm.get("description")?.touched) {
+
+          <div class="alert alert-danger">
+
+
+            @if (bookForm.get("description")?.getError("required")) {
+            <p>description is required.</p>
+            }
+
+            @else if (bookForm.get("description")?.getError("minlength")) {
+            <p>description must be at least 5 characters long.</p>
+            }
+
+            @else if (bookForm.get("description")?.getError("maxlength")) {
+            <p>description cannot exceed 40 characters.</p>
+            }
+          </div>
+          }
+        </div>
+
+      </div>
+
+      <button class="btn " type="submit">
+        {{ isEditMode ? 'Update Book' : 'Add Book' }}
+      </button>
+
+    </form>
+
+
+  </div>
+</section>

@@ -1,0 +1,62 @@
+<!-- books section  -->
+<section class="all-books">
+  <div class="container">
+
+
+    <!-- heading  -->
+    <div class="col-12">
+      <div class="all-books-head ">
+        <h2>AllBooks:</h2>
+        <button class="btn btn-danger" routerLink="/managebook">AddBooks</button>
+      </div>
+    </div>
+
+
+
+
+    <!-- all books card -->
+
+
+    <div class="col-12">
+      <div class="all-books-info">
+
+        <div class="row">
+          @for (item of AllBooks(); track item._id) {
+
+
+          <div class="col-lg-3 col-sm-12 col-md-4">
+            <div class="book-about ">
+              <h2>{{item.title}}</h2>
+              <p><span>Author:</span> {{ item.author }}</p>
+              <p><span>Category:</span> {{ item.category }}</p>
+              <p><span>Price:</span> {{ item.price |currency:"EGB"}}</p>
+              <p>{{ item.description }}</p>
+            </div>
+
+            <div class="icons-actions">
+              <i class="fa-solid fa-pen-to-square" [routerLink]="['/managebook' , item._id]"></i>
+              <i class="fa-regular fa-trash-can"  (click)="deleteBook(item._id)"></i>
+            </div>
+          </div>
+
+          }
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</section>

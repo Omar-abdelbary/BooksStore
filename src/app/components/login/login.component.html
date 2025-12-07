@@ -1,0 +1,141 @@
+<section class="login-about">
+  <div class="container">
+
+
+
+    <!-- background animation  -->
+    <div class="background">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+
+
+
+    <!-- form  -->
+
+
+    <form class="form-about"  [formGroup]="loginForm"  (ngSubmit)="loginSubmit()">
+
+
+      <!--  form head  -->
+      <div class="col-12">
+        <div class="form-head">
+          <h3>Sign in</h3>
+        </div>
+      </div>
+
+
+
+      <!--  email  -->
+      <div class="col-12">
+        <div class="form-info">
+          <label for="email">Email:</label>
+          <input type="email" id="email" class="form-control" placeholder=" enter email here.." formControlName="email"
+            [ngClass]="{
+            'is-valid' : !loginForm.get('email')?.errors && (loginForm.get('email')?.touched ||loginForm.get('email')?.dirty) ,
+            'is-invalid' : loginForm.get('email')?.errors && (loginForm.get('email')?.touched ||loginForm.get('email')?.dirty)
+          }">
+
+          @if (loginForm.get("email")?.errors && loginForm.get("email")?.touched) {
+
+          <div class="alert alert-danger">
+
+            @if (loginForm.get("email")?.getError("required")) {
+            <p> Email is required.</p>
+            }
+
+            @else if (loginForm.get("email")?.getError("email")) {
+            <p> Please enter a valid email address.</p>
+            }
+          </div>
+          }
+        </div>
+
+
+      </div>
+
+
+
+      <!--  password -->
+      <div class="col-12">
+        <div class="form-info">
+          <label for="password"> Password:</label>
+          <input type="password" id="password" class="form-control" placeholder="enter password here.. "
+            formControlName="password" [ngClass]="{
+            'is-valid' : !loginForm.get('password')?.errors && (loginForm.get('password')?.touched ||loginForm.get('password')?.dirty) ,
+            'is-invalid' : loginForm.get('password')?.errors && (loginForm.get('password')?.touched ||loginForm.get('password')?.dirty)
+          }">
+
+
+
+          @if (loginForm.get("password")?.errors && loginForm.get("password")?.touched) {
+
+          <div class="alert alert-danger">
+
+            @if (loginForm.get("password")?.getError("required")) {
+            <p> password is required.</p>
+            }
+          </div>
+          }
+
+
+        </div>
+      </div>
+
+
+
+
+      <!--  button submit  -->
+
+      <button class="btn btn-danger ">Submit</button>
+
+    </form>
+
+
+
+
+
+
+
+
+
+  </div>
+</section>

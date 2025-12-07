@@ -1,0 +1,36 @@
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BookService {
+
+  // injection service http clientt to use method play apis
+  private readonly _HttpClient = inject(HttpClient) ;
+
+
+
+  // get all books
+  getAllBooks():Observable<any> {
+    return this._HttpClient.get(`${environment.baseUrlForBooks}/api/2d17e9df15ea40119dae9c665b4b61c3/books`)
+  }
+
+// add new book
+  addBook(BookInfoForm:object):Observable<any> {
+    return this._HttpClient.post(`${environment.baseUrlForBooks}/api/2d17e9df15ea40119dae9c665b4b61c3/books` , BookInfoForm)
+  }
+
+  //  edit book
+
+
+  editBook(bookId:string , BookInfoForm:object):Observable<any> {
+    return this._HttpClient.put(`${environment.baseUrlForBooks}/api/2d17e9df15ea40119dae9c665b4b61c3/books/${bookId}` ,BookInfoForm )
+  }
+// delete speacific book with id
+  deleteBook(bookId:string):Observable<any> {
+    return this._HttpClient.delete(`${environment.baseUrlForBooks}/api/2d17e9df15ea40119dae9c665b4b61c3/books/${bookId}`)
+  }
+}
