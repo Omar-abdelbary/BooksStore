@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -8,9 +8,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookService {
 
+
+
+
   // injection service http clientt to use method play apis
   private readonly _HttpClient = inject(HttpClient) ;
-
+  private readonly _PLATFORM_ID = inject(PLATFORM_ID) ;
 
 
   // get all books
