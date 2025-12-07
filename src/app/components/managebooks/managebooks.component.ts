@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +25,19 @@ export class ManagebooksComponent {
   private readonly _PLATFORM_ID = inject(PLATFORM_ID);
   private readonly _Router = inject(Router);
   private readonly _Books = inject(BookService);
+
+
+   successAudio!: HTMLAudioElement;
+  errorAudio!: HTMLAudioElement;
+
+    constructor() {
+
+        if (isPlatformBrowser(this._PLATFORM_ID)) {
+       this.successAudio = new Audio('assets/sounds/notification-jump.wav');
+       this.errorAudio = new Audio('assets/sounds/Failure_Alert.mp3');
+      }
+
+    }
 
   bookId: string | null = null;
   isEditMode = false;
@@ -78,6 +91,7 @@ export class ManagebooksComponent {
         next: (res) => {
           this._ToastrService.success('Book Edited Successfully', 'BooksStore');
           this._Router.navigate(['/dashboard']);
+          this.successAudio.play() ;
         },
         error: (err) => this._ToastrService.error('Edit Failed'),
       });
@@ -87,6 +101,7 @@ export class ManagebooksComponent {
         next: (res) => {
           this._ToastrService.success('Book Added Successfully', 'BooksStore');
           this._Router.navigate(['/dashboard']);
+          this.successAudio.play() ;
           // this.bookForm.reset();
         },
         error: (err) => this._ToastrService.error('Add Failed'),
