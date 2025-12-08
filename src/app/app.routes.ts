@@ -23,8 +23,8 @@ export const routes: Routes = [
   {path:"" , component: BlankComponent , children:[
     {path:"" , redirectTo:"dashboard" , pathMatch:"full" , title:"dashboard"} ,
     {path:"dashboard" , component:DashboardComponent , title:"dashboard"} ,
-    {path:"managebook" , component: ManagebooksComponent , title:"manage books"} ,
-    {path:"managebook/:id" , component: ManagebooksComponent , title:"manage books"} ,
+    {path:"managebook" , loadComponent:()=>import('./components/managebooks/managebooks.component').then( (c)=>c.ManagebooksComponent) , title:"manage books"} ,
+    {path:"managebook/:id" , loadComponent:()=>import('./components/managebooks/managebooks.component').then( (c)=>c.ManagebooksComponent) , title:"manage books"} ,
   ]} ,
 
 
