@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ManagebooksComponent } from './components/managebooks/managebooks.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -20,7 +21,7 @@ export const routes: Routes = [
 
   // blank layouts
 
-  {path:"" , component: BlankComponent , children:[
+  {path:"" , component: BlankComponent , canActivate:[authGuard] , children:[
     {path:"" , redirectTo:"dashboard" , pathMatch:"full" , title:"dashboard"} ,
     {path:"dashboard" , component:DashboardComponent , title:"dashboard"} ,
     {path:"managebook" , loadComponent:()=>import('./components/managebooks/managebooks.component').then( (c)=>c.ManagebooksComponent) , title:"manage books"} ,
