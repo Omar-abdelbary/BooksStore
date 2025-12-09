@@ -5,12 +5,14 @@ import { BookService } from '../../core/services/book.service';
 import { ToastrService } from 'ngx-toastr';
 import { Ibook } from '../../core/interfaces/ibook';
 import { CurrencyPipe } from '@angular/common';
+import { FormsModule, NgModel } from '@angular/forms';
+import { SearchPipe } from '../../core/pipes/search.pipe';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CurrencyPipe, RouterLink , ],
+  imports: [CurrencyPipe, RouterLink ,FormsModule , SearchPipe ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -22,6 +24,9 @@ export class DashboardComponent {
 
   // variable
   AllBooks: WritableSignal<Ibook[]> = signal([]);
+
+  // search book name
+  bookName : string = "" ;
 
   ngOnInit(): void {
     this._Books.getAllBooks().subscribe({

@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookService {
 
+ 
+
 
 
 
@@ -32,6 +34,8 @@ export class BookService {
   editBook(bookId:string , BookInfoForm:object):Observable<any> {
     return this._HttpClient.put(`${environment.baseUrlForBooks}/api/d958e9f249454e9aa1d8b336970451a7/books/${bookId}` ,BookInfoForm )
   }
+
+
 // delete speacific book with id
   deleteBook(bookId:string):Observable<any> {
     return this._HttpClient.delete(`${environment.baseUrlForBooks}/api/d958e9f249454e9aa1d8b336970451a7/books/${bookId}`)

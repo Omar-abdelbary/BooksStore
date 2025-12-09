@@ -9,12 +9,14 @@ export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
 
   const _ToastrService = inject(ToastrService) ;
 
+  
+
 
 
 
   return next(req).pipe ( catchError( (err)=>{
 
-    _ToastrService.success(err.error.message , "BooksStore") ;
+    _ToastrService.error(err.error.message , "BooksStore") ;
     return throwError ( ()=> err)
   })) ;
 

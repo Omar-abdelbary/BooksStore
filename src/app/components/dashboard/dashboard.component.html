@@ -20,8 +20,14 @@
     <div class="col-12">
       <div class="all-books-info">
 
+        <div class="col-12">
+          <div class="search-book mt-5 mb-4">
+            <input type="search"  [(ngModel)]="bookName"] class="form-control mx-auto w-50" placeholder="search by book name..">
+          </div>
+        </div>
+
         <div class="row">
-          @for (item of AllBooks(); track item._id) {
+          @for (item of AllBooks() |search: bookName; track item._id) {
 
 
           <div class="col-lg-3 col-sm-12 col-md-4">
@@ -35,7 +41,7 @@
 
             <div class="icons-actions">
               <i class="fa-solid fa-pen-to-square bg-primary" [routerLink]="['/managebook' , item._id]"></i>
-              <i class="fa-regular fa-trash-can bg-danger"  (click)="deleteBook(item._id)"></i>
+              <i class="fa-regular fa-trash-can bg-danger" (click)="deleteBook(item._id)"></i>
             </div>
           </div>
 
