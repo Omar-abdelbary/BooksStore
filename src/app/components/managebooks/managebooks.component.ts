@@ -1,10 +1,11 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { Component, DestroyRef, inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../core/services/book.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-managebooks',
@@ -25,6 +26,7 @@ export class ManagebooksComponent {
   private readonly _PLATFORM_ID = inject(PLATFORM_ID);
   private readonly _Router = inject(Router);
   private readonly _Books = inject(BookService);
+  private readonly _DestroyRef = inject(DestroyRef) ;
 
 
    successAudio!: HTMLAudioElement;
@@ -65,7 +67,7 @@ export class ManagebooksComponent {
 
   // bring specific book data
   loadBookData(id: string) {
-    this._Books.getAllBooks().subscribe({
+    this._Books.getAllBooks().pipe(takeUntilDestroyed(this._DestroyRef)).subscribe({
       next: (allBooks) => {
         let book = allBooks.find((b: any) => b._id === id);
         if (book) {
@@ -87,7 +89,7 @@ export class ManagebooksComponent {
 
     if (this.isEditMode && this.bookId) {
       // update book
-      this._Books.editBook(this.bookId, this.bookForm.value).subscribe({
+      this._Books.editBook(this.bookId, this.bookForm.value).pipe(takeUntilDestroyed(this._DestroyRef)).subscribe({
         next: (res) => {
           this._ToastrService.success('Book Edited Successfully', 'BooksStore');
           this._Router.navigate(['/dashboard']);
@@ -97,7 +99,7 @@ export class ManagebooksComponent {
       });
     } else {
       // add new book
-      this._Books.addBook(this.bookForm.value).subscribe({
+      this._Books.addBook(this.bookForm.value).pipe(takeUntilDestroyed(this._DestroyRef)).subscribe({
         next: (res) => {
           this._ToastrService.success('Book Added Successfully', 'BooksStore');
           this._Router.navigate(['/dashboard']);

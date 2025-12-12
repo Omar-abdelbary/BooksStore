@@ -1,10 +1,11 @@
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { Component, DestroyRef, inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../core/services/auth.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent {
   private readonly _ToastrService = inject(ToastrService);
   private readonly _Auth = inject(AuthService);
   private readonly _PLATFORM_ID = inject(PLATFORM_ID) ;
+  private readonly _DestroyRef = inject(DestroyRef) ;
 
 
 
@@ -69,7 +71,7 @@ errorAudio!: HTMLAudioElement;
 
   loginSubmit() {
     if (this.loginForm.valid) {
-      this._Auth.login(this.loginForm.value).subscribe({
+      this._Auth.login(this.loginForm.value).pipe(takeUntilDestroyed(this._DestroyRef)).subscribe({
         next: (res) => {
           if (res.token) {
             localStorage.setItem('App_Token', res.token);

@@ -1,12 +1,13 @@
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
 import { BookService } from '../../core/services/book.service';
 import { ToastrService } from 'ngx-toastr';
 import { Ibook } from '../../core/interfaces/ibook';
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { SearchPipe } from '../../core/pipes/search.pipe';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class DashboardComponent {
 
   private readonly _Books = inject(BookService);
   private readonly _ToastrService = inject(ToastrService);
+  private readonly _DestroyRef = inject(DestroyRef) ;
 
   // variable
   AllBooks: WritableSignal<Ibook[]> = signal([]);
@@ -45,7 +47,7 @@ export class DashboardComponent {
   // delete book
 
   deleteBook(BookId: string) {
-    this._Books.deleteBook(BookId).subscribe({
+    this._Books.deleteBook(BookId).pipe(takeUntilDestroyed(this._DestroyRef)).subscribe({
       next: (res) => {
         console.log(res);
 
