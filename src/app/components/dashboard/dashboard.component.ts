@@ -51,7 +51,10 @@ export class DashboardComponent {
       next: (res) => {
         console.log(res);
 
-        this.AllBooks.set(res);
+       const updated = this.AllBooks()
+          .filter(book => book._id !== BookId);
+
+        this.AllBooks.set(updated);
 
         this._ToastrService.success('Success Delete Book', 'BooksStore');
       },

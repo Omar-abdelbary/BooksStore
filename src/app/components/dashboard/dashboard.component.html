@@ -22,7 +22,8 @@
 
         <div class="col-12">
           <div class="search-book mt-5 mb-4">
-            <input type="search"  [(ngModel)]="bookName"] class="form-control mx-auto w-50" placeholder="search by book name..">
+            <input type="search" [(ngModel)]="bookName" ] class="form-control mx-auto w-50"
+              placeholder="search by book name..">
           </div>
         </div>
 
@@ -31,18 +32,26 @@
 
 
           <div class="col-lg-3 col-sm-12 col-md-4">
-            <div class="book-about ">
-              <h2>{{item.title}}</h2>
-              <p><span>Author:</span> {{ item.author }}</p>
-              <p><span>Category:</span> {{ item.category }}</p>
-              <p><span>Price:</span> {{ item.price |currency:"EGB"}}</p>
-              <p>{{ item.description }}</p>
+
+
+
+            <div class="book-card">
+              <div class="book-about">
+                <h2>{{item.title}}</h2>
+                <p><span>Author:</span> {{ item.author }}</p>
+                <p><span>Category:</span> {{ item.category }}</p>
+                <p><span>Price:</span> {{ item.price | currency:"EGB" }}</p>
+                <p>{{ item.description }}</p>
+              </div>
+
+              <div class="icons-actions">
+                <i class="fa-solid fa-pen-to-square " [routerLink]="['/managebook' , item._id]"></i>
+                <i class="fa-regular fa-trash-can " (click)="deleteBook(item._id)"></i>
+              </div>
             </div>
 
-            <div class="icons-actions">
-              <i class="fa-solid fa-pen-to-square bg-primary" [routerLink]="['/managebook' , item._id]"></i>
-              <i class="fa-regular fa-trash-can bg-danger" (click)="deleteBook(item._id)"></i>
-            </div>
+
+
           </div>
 
           }

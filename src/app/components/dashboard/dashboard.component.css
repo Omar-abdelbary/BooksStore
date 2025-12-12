@@ -1,13 +1,10 @@
-
-
 .all-books {
   width: 100%;
   min-height: 100vh !important;
   /* background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); */
   background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+  overflow: hidden;
 }
-
-
 
 .all-books .all-books-head {
   width: 100%;
@@ -16,32 +13,26 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   padding-top: 25px;
-
 }
 
 .all-books .all-books-head h2 {
   color: #fff;
   font-size: 25px;
   text-decoration: underline;
-
 }
 
 .all-books .all-books-head .btn {
-
   margin-bottom: 10px;
 }
-
 
 .all-books .all-books-info {
   width: 100%;
   height: auto;
 }
 
-
-
 .all-books .all-books-info .book-about {
   margin-top: 25px;
-     position: relative;
+  position: relative !important;
   background: #fff;
   border-radius: 8px;
   padding: 20px;
@@ -49,11 +40,10 @@
   overflow: hidden;
   box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
   cursor: pointer;
-
 }
 
 .all-books .all-books-info .book-about::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   left: -2px;
@@ -87,11 +77,9 @@
   font-weight: bold;
 }
 
-
-
 .all-books .all-books-info .book-about p {
   color: #2c3e50;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   font-size: 16px;
 }
 
@@ -99,26 +87,36 @@
   font-weight: 600;
   color: #2980b9;
 
-   text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 }
 
+.book-card {
+  position: relative;
+  overflow: hidden;
+}
 
-.all-books .all-books-info .icons-actions {
-   position: absolute;
-  top: 20px;
-  right: -60px;
+.icons-actions {
+  position: absolute;
+  top: 50px !important;
+    right: -100px;   /* بعيد*/
+  opacity: 0;      /* تتخبّى نهائيًا */
   display: flex;
   flex-direction: column;
   gap: 12px;
   transition: right 0.3s ease-in-out;
-
 }
 
+.book-card:hover .icons-actions {
+  right: 15px;
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
 
 .icons-actions i {
   font-size: 20px;
   background: #fff;
-  padding: 10px;
+  padding: 10px 25px 10px 10px;
   border-radius: 8px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.15);
   cursor: pointer;
@@ -130,17 +128,9 @@
   background: #f7f7f7;
 }
 
-.book-about:hover + .icons-actions {
-  right: 10px;
-}
-
-
-
-@media (max-width:767px) {
-
+@media (max-width: 767px) {
   .all-books {
     width: 100%;
     height: auto !important;
   }
-
 }
